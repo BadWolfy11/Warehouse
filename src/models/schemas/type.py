@@ -2,19 +2,19 @@ from typing import Optional
 from pydantic import BaseModel
 
 
-class StatusBase(BaseModel):
+class TypeBase(BaseModel):
     pass
 
 
-class StatusCreate(StatusBase):
+class TypeCreate(TypeBase):
     name: str
 
 
-class StatusUpdate(StatusBase):
+class TypeUpdate(TypeBase):
     name: Optional[str]
 
 
-class Status(StatusBase):
+class Type(TypeBase):
     id: int
 
 

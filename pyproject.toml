@@ -7,6 +7,16 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.12"
+pydantic = "^2.7.1"
+pydantic-settings = "^2.2.1"
+uvicorn = "^0.29.0"
+loguru = "^0.7.2"
+sqlalchemy = "^2.0.29"
+asyncpg = "^0.29.0"
+python-jose = {extras = ["cryptography"], version = "^3.3.0"}
+passlib = {extras = ["bcrypt"], version = "^1.7.4"}
+fastcrud = "^0.12.1"
+bcrypt = "4.0.1"
 
 
 [build-system]

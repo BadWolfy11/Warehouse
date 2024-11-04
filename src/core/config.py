@@ -22,7 +22,7 @@ class Settings(BaseSettings):
     APP_DOCS_SWAGGER_URL: str = config("APP_DOCS_SWAGGER_URL", default="/docs")
     APP_DOCS_REDOC_URL: str = config("APP_DOCS_REDOC_URL", default="/redoc")
     APP_DOCS_OPENAPI_URL: str = config("APP_DOCS_OPENAPI_URL", default="/openapi.json")
-    APP_HOST: str = config("APP_HOST", default="0.0.0.0")
+    APP_HOST: str = config("APP_HOST", default="127.0.0.1")
     APP_PORT: int = config("APP_PORT", default=8000)
     APP_LOG_LEVEL: str = config("APP_LOG_LEVEL", default="info")
     APP_GENERATE_FIRST_USER_AND_ROLES: bool = config("APP_GENERATE_FIRST_USER_AND_ROLES", default=True)

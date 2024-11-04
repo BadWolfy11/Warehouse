@@ -8,7 +8,10 @@ from .documents import router as documents_router
 from .expenses import router as expenses_router
 from .goods import router as goods_router
 from .goods_documents import router as goods_documents_router
-from .status import router as status_router
+from .role import router as role_router
+from .person import router as person_router
+from .auth import router as auth_router
+from .type import router as type_router
 from .users import router as users_router
 
 
@@ -21,5 +24,7 @@ router.include_router(documents_router, dependencies=[Depends(auth_check)])
 router.include_router(expenses_router, dependencies=[Depends(auth_check)])
 router.include_router(goods_router, dependencies=[Depends(auth_check)])
 router.include_router(goods_documents_router, dependencies=[Depends(auth_check)])
-router.include_router(status_router, dependencies=[Depends(auth_check)])
+router.include_router(role_router, dependencies=[Depends(auth_check)])
 router.include_router(users_router, dependencies=[Depends(auth_check)])
+router.include_router(type_router, dependencies=[Depends(auth_check)])
+router.include_router(person_router, dependencies=[Depends(auth_check)])

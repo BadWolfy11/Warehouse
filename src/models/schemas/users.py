@@ -3,41 +3,35 @@ from pydantic import BaseModel
 
 
 class UsersBase(BaseModel):
-    pass
+    id: Optional[int] = None
 
 
 class UsersCreate(UsersBase):
-    name: str
-    last_name: str
+    person_id: Optional[int] = None
+    role_id: Optional[int] = None
     login: str
     password: str
-    status_id: int
-    address_is: int
-    email: str
-    notes: str
+
+
+class UsersFind(UsersBase):
+    person_id: Optional[int]
+    role_id: Optional[int]
+    login: Optional[str]
 
 
 class UsersUpdate(UsersBase):
-    name: Optional[str]
-    last_name: Optional[str]
+    person_id: Optional[int]
     login: Optional[str]
     password: Optional[str]
-    status_id: Optional[int]
-    address_is: Optional[int]
-    email: Optional[str]
-    notes: Optional[str]
+    person_id: Optional[int]
+    role_id: Optional[int]
 
 
 class Users(UsersBase):
-    id: int
-    name: str
-    last_name: str
+    person_id: int
+    role_id: int
     login: str
     password: str
-    status_id: int
-    address_is: int
-    email: str
-    notes: str
 
     class Config:
         from_attributes = True

@@ -1,7 +1,7 @@
 from sqlalchemy import Table, Date, Boolean, Text, ForeignKeyConstraint
 from sqlalchemy.dialects.postgresql import ARRAY
 
-from sqlalchemy import Column, Integer, String, ForeignKey
+from sqlalchemy import Column, Integer, String, ForeignKey, Double
 from sqlalchemy.orm import DeclarativeBase, relationship, Session
 
 class Base(DeclarativeBase):
@@ -10,16 +10,22 @@ class Base(DeclarativeBase):
 class Users(Base):
     __tablename__ = 'users'
     id = Column(Integer, primary_key=True, index=True)
+    login = Column(String(50), unique=True ,nullable=False)
+    password = Column(String(50), nullable=False)
+    role_id = Column(Integer, ForeignKey('status.id'), nullable=True)
+    person_id = Column(Integer, ForeignKey('person.id'), nullable=True)
+
+class Person(Base):
+    __tablename__ = 'person'
+    id = Column(Integer, primary_key=True, index=True)
     name = Column(String(100), nullable=False)
     last_name = Column(String(100), nullable=False)
-    login = Column(String(50), unique=True ,nullable=False)
-    password = Column(String(50),nullable=False)
-    status_id = Column(Integer, ForeignKey('status.id'), nullable=True)
     address_id = Column(Integer, ForeignKey('address.id'), nullable=True)
-    email = Column(String(9), nullable=False)
+    email = Column(String(100), nullable=False)
+    phone = Column(String(9), nullable=False)
     notes = Column(String(255), nullable=False)
 
-class Status(Base):
+class Role(Base):
     __tablename__ = 'status'
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String(255), nullable=False)
@@ -36,9 +42,15 @@ class Goods(Base):
 class Documents(Base):
     __tablename__ = 'documents'
     id = Column(Integer, primary_key=True, index=True)
+    type_id = Column(Integer, ForeignKey('type.id'), nullable=True)
     name = Column(String(255), nullable=False)
     data = Column(Date, nullable=False)
-    user_id = Column(Integer, ForeignKey('users.id'), nullable=True)
+    user_id = Column(Integer, ForeignKey('person.id'), nullable=True)
+
+class Type(Base):
+    __tablename__ = 'type'
+    id = Column(Integer, primary_key=True, index=True)
+    name = Column(String(255), nullable=False)
 
 class GoodsDocuments(Base):
     __tablename__ = 'goods_documents'
@@ -59,7 +71,7 @@ class Expenses(Base):
     __tablename__ = 'expenses'
     id = Column(Integer, primary_key=True, index=True)
     data = Column(Date, nullable=False)
-    amount = Column(float, nullable=False)
+    amount = Column(Double(5), nullable=False)
     name = Column(String(40), nullable=False)
     attachments = Column(String(255), nullable=False)
     category_id = Column(Integer, ForeignKey('categories.id'), nullable=True)

@@ -1,5 +1,6 @@
 from typing import Optional
 from pydantic import BaseModel
+from datetime import date
 
 
 class DocumentsBase(BaseModel):
@@ -7,18 +8,21 @@ class DocumentsBase(BaseModel):
 
 
 class DocumentsCreate(DocumentsBase):
+    type_id: int
     name: str
     data: date
     user_id: int
 
 
 class DocumentsUpdate(DocumentsBase):
+    type_id: Optional[int]
     name: Optional[str]
     data: Optional[date]
     user_id: Optional[int]
 
 
 class Documents(DocumentsBase):
+    type_id: int
     id: int
     name: str
     data: date
