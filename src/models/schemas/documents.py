@@ -18,7 +18,7 @@ class DocumentsUpdate(DocumentsBase):
     type_id: Optional[int]
     name: Optional[str]
     data: Optional[date]
-    user_id: Optional[int]
+    person_id: Optional[int]
 
 
 class Documents(DocumentsBase):
@@ -26,7 +26,7 @@ class Documents(DocumentsBase):
     id: int
     name: str
     data: date
-    user_id: int
+    person_id: int
 
     class Config:
         from_attributes = True

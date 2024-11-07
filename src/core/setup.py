@@ -93,10 +93,7 @@ def create_application(
         "title": settings.APP_NAME,
         "description": settings.APP_DESCRIPTION,
         "contact": {"name": settings.APP_CONTACT_NAME, "email": settings.APP_CONTACT_EMAIL},
-        "license_info": {"name": settings.APP_LICENSE_NAME},
-        "docs_url": None,
-        "redoc_url": None,
-        "openapi_url": None
+        "license_info": {"name": settings.APP_LICENSE_NAME}
     })
 
     lifespan = lifespan_factory(settings=settings)
@@ -107,26 +104,6 @@ def create_application(
     logger.info("Add routes..")
     application.include_router(router)
 
-    if settings.APP_DOCS_ENABLE:
-        logger.warning("APP_DOCS_ENABLE=True")
-        logger.info("Configure docs page..")
-
-        docs_router = APIRouter()
-
-        @docs_router.get(settings.APP_DOCS_SWAGGER_URL, include_in_schema=False)
-        async def swagger() -> fastapi.responses.HTMLResponse:
-            return get_swagger_ui_html(openapi_url=settings.APP_DOCS_OPENAPI_URL, title=settings.APP_NAME)
-
-        @docs_router.get(settings.APP_DOCS_REDOC_URL, include_in_schema=False)
-        async def redoc() -> fastapi.responses.HTMLResponse:
-            return get_redoc_html(openapi_url=settings.APP_DOCS_OPENAPI_URL, title=settings.APP_NAME)
-
-        @docs_router.get(settings.APP_DOCS_OPENAPI_URL, include_in_schema=False)
-        async def openapi() -> dict[str, Any]:
-            out: dict = get_openapi(title=settings.APP_NAME, version=settings.APP_VERSION, routes=application.routes)
-            return out
-
-        application.include_router(docs_router)
 
     logger.info("Application successfully created!")
     return application

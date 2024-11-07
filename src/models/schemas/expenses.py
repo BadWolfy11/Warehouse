@@ -20,7 +20,7 @@ class ExpensesUpdate(ExpensesBase):
     amount: Optional[int]
     name: Optional[str]
     attachments: Optional[str]
-    user_id: Optional[int]
+    category_id: Optional[int]
 
 
 class Expenses(ExpensesBase):

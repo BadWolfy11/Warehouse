@@ -24,3 +24,4 @@ class AuthSuccess(AuthBase):
     access_token: str
 
 
+

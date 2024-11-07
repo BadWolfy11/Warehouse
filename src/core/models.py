@@ -45,7 +45,7 @@ class Documents(Base):
     type_id = Column(Integer, ForeignKey('type.id'), nullable=True)
     name = Column(String(255), nullable=False)
     data = Column(Date, nullable=False)
-    user_id = Column(Integer, ForeignKey('person.id'), nullable=True)
+    person_id = Column(Integer, ForeignKey('person.id'), nullable=True)
 
 class Type(Base):
     __tablename__ = 'type'
@@ -71,7 +71,7 @@ class Expenses(Base):
     __tablename__ = 'expenses'
     id = Column(Integer, primary_key=True, index=True)
     data = Column(Date, nullable=False)
-    amount = Column(Double(5), nullable=False)
+    amount = Column(Integer, nullable=False)
     name = Column(String(40), nullable=False)
     attachments = Column(String(255), nullable=False)
     category_id = Column(Integer, ForeignKey('categories.id'), nullable=True)

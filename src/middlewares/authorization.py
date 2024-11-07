@@ -29,7 +29,7 @@ async def auth_check(token: Annotated[str, Depends(security)], con = Depends(get
     except JWTError as e:
         raise credentials_exception
 
-    user = await crud_user.get(db=con, schema_to_select=UserBase, id=int(user_id))
+    user = await crud_user.get(db=con, schema_to_select=UsersBase, id=int(user_id))
 
     if user is None:
         raise credentials_exception
