@@ -8,11 +8,11 @@ class ExpensesBase(BaseModel):
 
 
 class ExpensesCreate(ExpensesBase):
-    data: int
+    data: date
     amount: int
     name: str
     attachments: str
-    category_id: int
+    expense_category_id: int
 
 
 class ExpensesUpdate(ExpensesBase):
@@ -20,16 +20,16 @@ class ExpensesUpdate(ExpensesBase):
     amount: Optional[int]
     name: Optional[str]
     attachments: Optional[str]
-    category_id: Optional[int]
+    expense_category_id: Optional[int]
 
 
 class Expenses(ExpensesBase):
     id: int
-    data: int
+    data: date
     amount: int
     name: str
     attachments: str
-    category_id: int
+    expense_category_id: int
 
     class Config:
         from_attributes = True

@@ -13,6 +13,7 @@ from .person import router as person_router
 from .auth import router as auth_router
 from .type import router as type_router
 from .users import router as users_router
+from .expense_categories import router as expense_categories_router
 
 
 router = APIRouter()
@@ -24,6 +25,7 @@ router.include_router(documents_router, dependencies=[Depends(auth_check)])
 router.include_router(expenses_router, dependencies=[Depends(auth_check)])
 router.include_router(goods_router, dependencies=[Depends(auth_check)])
 router.include_router(goods_documents_router, dependencies=[Depends(auth_check)])
+router.include_router(expense_categories_router, dependencies=[Depends(auth_check)])
 router.include_router(role_router, dependencies=[Depends(auth_check)])
 router.include_router(users_router, dependencies=[Depends(auth_check)])
 router.include_router(type_router, dependencies=[Depends(auth_check)])

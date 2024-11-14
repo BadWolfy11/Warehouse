@@ -55,7 +55,6 @@ class Type(Base):
 class GoodsDocuments(Base):
     __tablename__ = 'goods_documents'
     id = Column(Integer, primary_key=True, index=True)
-    name = Column(String(255), nullable=False)
     quantity = Column(Integer, nullable=False)
     item_id = Column(Integer, ForeignKey('goods.id'), nullable=True)
     document_id = Column(Integer, ForeignKey('documents.id'), nullable=True)
@@ -74,7 +73,12 @@ class Expenses(Base):
     amount = Column(Integer, nullable=False)
     name = Column(String(40), nullable=False)
     attachments = Column(String(255), nullable=False)
-    category_id = Column(Integer, ForeignKey('categories.id'), nullable=True)
+    expense_category_id = Column(Integer, ForeignKey('categories.id'))
+
+class ExpenseCategories(Base):
+    __tablename__ = 'expense_categories'
+    id = Column(Integer, primary_key=True, index=True)
+    name = Column(String(40), nullable=False)
 
 class Categories(Base):
     __tablename__ = 'categories'

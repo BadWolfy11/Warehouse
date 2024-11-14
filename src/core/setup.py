@@ -23,13 +23,13 @@ settings = Settings()
 
 async def create_tables() -> None:
     async with engine.begin() as conn:
-        logger.info("Check database structure..")
+        logger.info("Создание базы")
         Base = get_base()
         await conn.run_sync(Base.metadata.create_all)
 
 
 async def check_roles(conn = get_async_session()):
-    logger.info("Check user roles is exists..")
+    logger.info("Проверка существования ролей")
     conn = await anext(conn)
 
     if not await crud_role.get(db=conn, code=settings.APP_EMPLOYER_DEFAULT_ROLE_CODE):
@@ -48,7 +48,7 @@ async def check_roles(conn = get_async_session()):
 
 
 async def check_admin_user(conn = get_async_session()) -> None:
-    logger.info("Check admin user is exists..")
+    logger.info("Проверка существования администратора")
     conn = await anext(conn)
 
     if not await crud_user.get(db=conn, login=settings.ADMIN_USERNAME):
@@ -86,7 +86,7 @@ def create_application(
     settings: Settings,
     **kwargs: Any,
 ) -> FastAPI:
-    logger.info("Create application..")
+    logger.info("создание приложения")
 
     logger.info("Configure app settings..")
     kwargs.update({
@@ -100,10 +100,8 @@ def create_application(
 
     logger.info("Init FastAPI..")
     application = FastAPI(lifespan=lifespan, **kwargs)
-
-    logger.info("Add routes..")
     application.include_router(router)
 
 
-    logger.info("Application successfully created!")
+    logger.info("Приложение успешно создано")
     return application
