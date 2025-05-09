@@ -1,10 +1,8 @@
 from typing import Optional
 from pydantic import BaseModel
 
-
 class GoodsBase(BaseModel):
     pass
-
 
 class GoodsCreate(GoodsBase):
     barcode: str
@@ -12,16 +10,17 @@ class GoodsCreate(GoodsBase):
     description: str
     category_id: int
     attachments: str
-
-
+    price: float
+    stock: int
 
 class GoodsUpdate(GoodsBase):
-    barcode: Optional[str]
-    name: Optional[str]
-    description: Optional[str]
-    category_id: Optional[int]
-    attachments: Optional[str]
-
+    barcode: Optional[str] = None
+    name: Optional[str] = None
+    description: Optional[str] = None
+    category_id: Optional[int] = None
+    attachments: Optional[str] = None
+    price: Optional[float] = None
+    stock: Optional[int] = None
 
 class Goods(GoodsBase):
     id: int
@@ -30,7 +29,8 @@ class Goods(GoodsBase):
     description: str
     category_id: int
     attachments: str
+    price: float
+    stock: int
 
     class Config:
         from_attributes = True
-

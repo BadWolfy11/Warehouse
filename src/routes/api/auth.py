@@ -8,6 +8,7 @@ from models.schemas.users import UsersCreate
 from jose import jwt
 from datetime import datetime, timedelta, timezone
 from passlib.context import CryptContext
+from passlib.exc import UnknownHashError
 
 from models.schemas.auth import (
     AuthSuccess,
@@ -33,9 +34,11 @@ async def login(data: AuthLogin, con = Depends(get_async_session)) -> AuthSucces
 
     user = await crud_user.get(db=con, login=data.login)
 
-    if user is None or not pwd_context.verify(data.password, user['password']):
+    try:
+        if user is None or not pwd_context.verify(data.password, user['password']):
+            raise error
+    except UnknownHashError:
         raise error
-
 
     role = None
 

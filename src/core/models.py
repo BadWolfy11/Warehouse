@@ -1,5 +1,6 @@
 from sqlalchemy import Table, Date, Boolean, Text, ForeignKeyConstraint
 from sqlalchemy.dialects.postgresql import ARRAY
+from sqlalchemy import DateTime, func
 
 from sqlalchemy import Column, Integer, String, ForeignKey, Double
 from sqlalchemy.orm import DeclarativeBase, relationship, Session
@@ -12,7 +13,7 @@ class Users(Base):
     id = Column(Integer, primary_key=True, index=True)
     login = Column(String(50), unique=True ,nullable=False)
     password = Column(String(50), nullable=False)
-    role_id = Column(Integer, ForeignKey('status.id'), nullable=True)
+    role_id = Column(Integer, ForeignKey('role.id'), nullable=True)
     person_id = Column(Integer, ForeignKey('person.id'), nullable=True)
 
 class Person(Base):
@@ -26,7 +27,7 @@ class Person(Base):
     notes = Column(String(255), nullable=False)
 
 class Role(Base):
-    __tablename__ = 'status'
+    __tablename__ = 'role'
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String(255), nullable=False)
 
@@ -38,6 +39,9 @@ class Goods(Base):
     description = Column(String(255), nullable=False)
     category_id = Column(Integer, ForeignKey('categories.id'), nullable=True)
     attachments = Column(String(255), nullable=False)
+    price = Column(Double, nullable=True)
+    stock = Column(Integer, nullable=True)
+
 
 class Documents(Base):
     __tablename__ = 'documents'
@@ -84,6 +88,19 @@ class Categories(Base):
     __tablename__ = 'categories'
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String(255), nullable=False)
+
+class GoodsHistory(Base):
+    __tablename__ = 'goods_history'
+
+    id = Column(Integer, primary_key=True, index=True)
+    goods_id = Column(Integer, ForeignKey('goods.id'), nullable=False)
+    user_id = Column(Integer, ForeignKey('users.id'), nullable=False)
+    action = Column(String(50), nullable=False)
+    field_changed = Column(String(50), nullable=False)
+    old_value = Column(String(255), nullable=True)
+    new_value = Column(String(255), nullable=True)
+    changed_at = Column(DateTime, nullable=False, server_default=func.now())
+
 
 def get_base():
     return Base

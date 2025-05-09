@@ -11,7 +11,7 @@ class DocumentsCreate(DocumentsBase):
     type_id: int
     name: str
     data: date
-    user_id: int
+    person_id: int
 
 
 class DocumentsUpdate(DocumentsBase):

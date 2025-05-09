@@ -1,17 +1,14 @@
 from typing import Optional
 from pydantic import BaseModel
 
-
-class UsersBase(BaseModel):
-    id: Optional[int] = None
-
-
-class UsersCreate(UsersBase):
+class UsersCreate(BaseModel):
     person_id: Optional[int] = None
     role_id: Optional[int] = None
     login: str
     password: str
 
+class UsersBase(UsersCreate):
+    id: Optional[int] = None
 
 class UsersFind(UsersBase):
     person_id: Optional[int]
