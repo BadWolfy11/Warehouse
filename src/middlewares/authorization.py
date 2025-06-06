@@ -11,7 +11,7 @@ from models.schemas.users import Users as UsersBase
 security = HTTPBearer()
 crud_user = FastCRUD(Users)
 
-
+#проверка токена для действий с API
 async def auth_check(token: Annotated[str, Depends(security)], con = Depends(get_async_session)):
     credentials_exception = HTTPException(
         status_code=401,

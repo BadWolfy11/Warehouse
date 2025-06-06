@@ -12,9 +12,9 @@ class GoodsHistoryBase(BaseModel):
     new_value: Optional[str]
     changed_at: datetime
 
-
-class GoodsHistory(GoodsHistoryBase):
+class GoodsHistoryOut(GoodsHistoryBase):
     id: int
+
 
     class Config:
         from_attributes = True

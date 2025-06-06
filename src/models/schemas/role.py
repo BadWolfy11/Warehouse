@@ -16,6 +16,7 @@ class RoleUpdate(RoleBase):
 
 class Role(RoleBase):
     id: int
+    name: str
 
 
     class Config:

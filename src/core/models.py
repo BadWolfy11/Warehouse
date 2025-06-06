@@ -24,7 +24,6 @@ class Person(Base):
     address_id = Column(Integer, ForeignKey('address.id'), nullable=True)
     email = Column(String(100), nullable=False)
     phone = Column(String(9), nullable=False)
-    notes = Column(String(255), nullable=False)
 
 class Role(Base):
     __tablename__ = 'role'
@@ -43,25 +42,25 @@ class Goods(Base):
     stock = Column(Integer, nullable=True)
 
 
-class Documents(Base):
-    __tablename__ = 'documents'
-    id = Column(Integer, primary_key=True, index=True)
-    type_id = Column(Integer, ForeignKey('type.id'), nullable=True)
-    name = Column(String(255), nullable=False)
-    data = Column(Date, nullable=False)
-    person_id = Column(Integer, ForeignKey('person.id'), nullable=True)
+# class Documents(Base):
+#     __tablename__ = 'documents'
+#     id = Column(Integer, primary_key=True, index=True)
+#     type_id = Column(Integer, ForeignKey('type.id'), nullable=True)
+#     name = Column(String(255), nullable=False)
+#     data = Column(Date, nullable=False)
+#     person_id = Column(Integer, ForeignKey('person.id'), nullable=True)
 
 class Type(Base):
     __tablename__ = 'type'
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String(255), nullable=False)
 
-class GoodsDocuments(Base):
-    __tablename__ = 'goods_documents'
-    id = Column(Integer, primary_key=True, index=True)
-    quantity = Column(Integer, nullable=False)
-    item_id = Column(Integer, ForeignKey('goods.id'), nullable=True)
-    document_id = Column(Integer, ForeignKey('documents.id'), nullable=True)
+# class GoodsDocuments(Base):
+#     __tablename__ = 'goods_documents'
+#     id = Column(Integer, primary_key=True, index=True)
+#     quantity = Column(Integer, nullable=False)
+#     item_id = Column(Integer, ForeignKey('goods.id'), nullable=True)
+#     document_id = Column(Integer, ForeignKey('documents.id'), nullable=True)
 
 class Address(Base):
     __tablename__ = 'address'

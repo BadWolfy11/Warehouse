@@ -24,7 +24,7 @@ custom_router = APIRouter(
     tags=["Categories"],
 )
 
-# метод получения всех категорий
+
 @custom_router.get("/all", response_model=list[CategorySchema], name="Get all categories")
 async def get_all_categories(db: AsyncSession = Depends(get_async_session)):
     result = await db.execute(select(Categories))

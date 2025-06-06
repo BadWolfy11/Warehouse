@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from typing import Optional
 
 class AuthBase(BaseModel):
@@ -14,6 +14,8 @@ class AuthRegistration(AuthBase):
     login: str
     password: str
     password_confirm: str
+    role_id: Optional[int] = Field(default=1001)
+    person_id: Optional[int] = None
 
 
 class AuthSuccess(AuthBase):

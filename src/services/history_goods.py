@@ -1,15 +1,18 @@
-from models.schemas.goods import Goods
+from core.models import Goods
 from models.schemas.goods_history import GoodsHistoryBase
 from sqlalchemy.ext.asyncio import AsyncSession
 from fastapi import HTTPException
 from datetime import datetime
+
+from src.core.models import GoodsHistory
+
 
 async def update_goods_with_history(goods_id: int, data: dict, user_id: int, db: AsyncSession):
     goods = await db.get(Goods, goods_id)
     if not goods:
         raise HTTPException(status_code=404, detail="Товар не найден")
 
-    fields_to_track = ['price', 'quantity', 'name', 'description']
+    fields_to_track = ['price', 'stock', 'name', 'description', 'attachments']
     history = []
 
     for field in fields_to_track:

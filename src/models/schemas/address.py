@@ -9,20 +9,20 @@ class AddressBase(BaseModel):
 class AddressCreate(AddressBase):
     city: str
     street: str
-    appartament: str
+    appartment: str
 
 
 class AddressUpdate(AddressBase):
     city: Optional[str]
     street: Optional[str]
-    appartament: Optional[str]
+    appartment: Optional[str]
 
 
 class Address(AddressBase):
     id: Optional[int] = None
     city: str
     street: str
-    appartament: str
+    appartment: str
 
     class Config:
         from_attributes = True

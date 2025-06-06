@@ -3,35 +3,27 @@ from pydantic import BaseModel
 
 
 class PersonBase(BaseModel):
-    pass
-
-
-class PersonCreate(PersonBase):
     name: str
     last_name: str
     address_id: int
     email: str
     phone: str
-    notes: str
 
 
-class PersonUpdate(PersonBase):
-    name: Optional[str]
-    last_name: Optional[str]
-    address_id: Optional[int]
-    email: Optional[str]
-    phone: Optional[str]
-    notes: Optional[str]
+class PersonCreate(PersonBase): # Можно сразу на запросах юзать PersonBase, если делаешь роуты не через круд
+    pass
+
+
+class PersonUpdate(BaseModel):
+    name: Optional[str] = None
+    last_name: Optional[str] = None
+    address_id: Optional[int] = None
+    email: Optional[str] = None
+    phone: Optional[str] = None
 
 
 class Person(PersonBase):
     id: int
-    name: str
-    last_name: str
-    address_id: int
-    email: str
-    phone: str
-    notes: str
 
     class Config:
         from_attributes = True
