@@ -61,5 +61,5 @@ async def search_users(
     }
 
 router = APIRouter()
-router.include_router(crud)           # от fastcrud
-router.include_router(custom_router)  # наш кастомный поиск
+router.include_router(crud)
+router.include_router(custom_router)

@@ -13,12 +13,12 @@ router = APIRouter()
 
 @router.post("/user/full-create", response_model=Users, status_code=status.HTTP_201_CREATED)
 async def full_create_user(
-    user_data: UsersCreate,  # логин, пароль, role_id
-    person_data: PersonCreate,  # имя, фамилия, email, phone, address_id (временно None)
-    address_data: AddressCreate,  # city, street, appartment
+    user_data: UsersCreate,
+    person_data: PersonCreate,
+    address_data: AddressCreate,
     db: AsyncSession = Depends(get_async_session)
 ):
-    # 1. Создание или поиск адреса
+
     addr_query = select(Address).where(
         Address.city == address_data.city,
         Address.street == address_data.street,
@@ -31,7 +31,7 @@ async def full_create_user(
         await db.flush()
         await db.refresh(address)
 
-    # 2. Создание или поиск персоны
+
     person_query = select(Person).where(
         Person.name == person_data.name,
         Person.last_name == person_data.last_name,
@@ -45,12 +45,12 @@ async def full_create_user(
         await db.flush()
         await db.refresh(person)
 
-    # 3. Проверка на уникальность логина
+
     existing_user = await db.execute(select(Users).where(Users.login == user_data.login))
     if existing_user.scalars().first():
         raise HTTPException(status_code=409, detail="Пользователь с таким логином уже существует")
 
-    # 4. Создание пользователя
+
     new_user = Users(
         login=user_data.login,
         password=user_data.password,

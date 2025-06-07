@@ -12,7 +12,7 @@ from models.schemas.goods import GoodsCreate, GoodsUpdate, Goods as GoodsSchema
 from middlewares.authorization import auth_check
 from services.history_goods import update_goods_with_history
 
-# основной CRUD-роутер
+
 crud = crud_router(
     session=get_async_session,
     model=Goods,
@@ -23,7 +23,6 @@ crud = crud_router(
 
 )
 
-#кастомный роутер по поиску товаров
 custom_router = APIRouter(
     prefix='/goods',
     tags=['Goods']

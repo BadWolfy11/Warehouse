@@ -10,7 +10,7 @@ from core.database import get_async_session
 from core.models import Expenses
 from models.schemas.expenses import ExpensesCreate, ExpensesUpdate, Expenses as ExpensesSchema
 
-# CRUD
+
 crud = crud_router(
     session=get_async_session,
     model=Expenses,
@@ -20,7 +20,7 @@ crud = crud_router(
     tags=["Expenses"],
 )
 
-# Кастомный роутер
+
 custom_router = APIRouter(
     prefix='/expenses',
     tags=["Expenses"]

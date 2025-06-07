@@ -9,7 +9,6 @@ from models.schemas.categories import CategoriesCreate, CategoriesUpdate, Catego
 
 from src.routes.api.expenses import custom_router
 
-# Создаем основной роутер
 crud = crud_router(
     session=get_async_session,
     model=Categories,
